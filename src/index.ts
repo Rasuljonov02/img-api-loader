@@ -1,5 +1,5 @@
 import "./main.css";
-// import "./2shart";
+
 import "./1shart";
 
 const contener: HTMLDivElement = document.querySelector(".contener")!;

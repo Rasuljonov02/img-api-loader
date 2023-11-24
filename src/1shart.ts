@@ -38,7 +38,7 @@ function imgApi(a: any) {
 }
 
 let i = 0;
-let maxIterations = 3;
+let maxIterations = 4;
 
 function updateDisplay() {
   if (i < maxIterations) {
