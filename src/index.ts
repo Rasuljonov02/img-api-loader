@@ -1,34 +1,17 @@
 import "./main.css";
-import axios, { AxiosResponse } from "axios";
+// import "./2shart";
+import "./1shart";
 
-const imgdiv: NodeListOf<HTMLDataElement> = document.querySelectorAll(".imgdiv")!;
-const loader: NodeListOf<HTMLDataElement> = document.querySelectorAll(".loader")!;
-const baseURL = "https://picsum.photos/v2/list?page=2&limit=50";
+const contener: HTMLDivElement = document.querySelector(".contener")!;
+const contener1: HTMLDivElement = document.querySelector(".contener1")!;
 
-async function searchVideos() {
-  try {
-    const response = await axios.get(`${baseURL}`);
-    imgApi(response);
-  } catch (error) {
-    console.error(error);
-  }
-}
-
-function imgApi(a: any) {
-  for (let i = 0; i < 4; i++) {
-    let random = Math.floor(Math.random() * 50);
-    console.log(random);
-    let img: HTMLImageElement = document.createElement("img");
-    img.src = a.data[random].download_url;
-    imgdiv[i].innerHTML = '';
-    imgdiv[i].appendChild(img);
-  }
-
-  loader.forEach((aaa) => {
-    aaa.remove();
-  });
-
-  console.log(a.data);
-}
-
-searchVideos();
+let i = 0;
+let taim = setTimeout(function updateDisplay() {
+    if (i < 3) {
+        i++;
+        taim = setTimeout(updateDisplay, 1000);
+    } else {
+        contener.style.display = "grid";
+        contener1.style.display = "none";
+    }
+}, 1000);
