@@ -1,52 +1,54 @@
 import axios from "axios";
 
-const baseURL = "https://picsum.photos/v2/list?page=2&limit=130";
-
+const baseURL = "https://picsum.photos/v2/list?page=2&limit=150";
 async function searchVideos() {
-  try {
-    const response = await axios.get(`${baseURL}`);
-    imgApi(response);
-  } catch (error) {
-    console.error(error);
-  }
+	try {
+		const response = await axios.get(`${baseURL}`);
+
+		imgApi(response);
+	} catch (error) {
+		console.error(error);
+	}
 }
+
 
 const imgdiv: NodeListOf<HTMLDataElement> = document.querySelectorAll(".imgdiv")!;
 const loader: NodeListOf<HTMLDataElement> = document.querySelectorAll(".loader")!;
 
 function imgApi(a: any) {
-  for (let i = 0; i < 4; i++) {
-    let img: HTMLImageElement = document.createElement("img");
-    let random = Math.floor(Math.random() * 130);
-    img.src = a.data[random].download_url;
-    console.log(random);
+	for (let i = 0; i < 4; i++) {
+		let img: HTMLImageElement = document.createElement("img");
+		let random = Math.floor(Math.random() * 150);
 
-    console.log((img.id = i.toString()));
+		img.src = a.data[random].download_url;
+		console.log(random);
 
-    if (imgdiv[i].querySelector("img")) {
-      loader[i].classList.add("naull") ;
-      continue;
-    }
+		console.log((img.id = i.toString()));
 
-    imgdiv[i].innerHTML = "";
-    imgdiv[i].appendChild(img);
+		if (imgdiv[i].querySelector("img")) {
+			loader[i].classList.add("naull");
+			continue;
+		}
 
-    loader[i].classList.add("naull") ;
-  }
+		imgdiv[i].innerHTML = "";
+		imgdiv[i].appendChild(img);
 
-  console.log(a.data);
+		loader[i].classList.add("naull");
+	}
+
+	console.log(a.data);
 }
 
 let i = 0;
 let maxIterations = 4;
 
 function updateDisplay() {
-  if (i < maxIterations) {
-    i++;
-    setTimeout(updateDisplay, 1000);
-  } else {
-    searchVideos();
-  }
+	if (i < maxIterations) {
+		i++;
+		setTimeout(updateDisplay, 1000);
+	} else {
+		searchVideos();
+	}
 }
 // searchVideos();
-updateDisplay();
+updateDisplay()
